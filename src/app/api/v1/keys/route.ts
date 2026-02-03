@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
       if (error instanceof ZodError) {
         return errorResponse(
           'VALIDATION_ERROR',
-          error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', '),
+          error.issues.map(e => `${e.path.join('.')}: ${e.message}`).join(', '),
           400
         )
       }
@@ -155,7 +155,7 @@ export async function POST(req: NextRequest) {
       if (error instanceof ZodError) {
         return errorResponse(
           'VALIDATION_ERROR',
-          error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', '),
+          error.issues.map(e => `${e.path.join('.')}: ${e.message}`).join(', '),
           400
         )
       }
@@ -184,6 +184,9 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate project ownership and get project details
+    if (!projectId) {
+      return errorResponse('PROJECT_REQUIRED', 'Project ID is required', 400)
+    }
     const ownershipCheck = await validateProjectOwnership(projectId, developer)
     if (!ownershipCheck.valid) {
       return errorResponse('FORBIDDEN', 'You do not have access to this project', 403)
@@ -201,7 +204,7 @@ export async function POST(req: NextRequest) {
       scopes = validatedData.scopes || Array.from(getMcpDefaultScopes(mcpAccessLevel))
     } else {
       // For non-MCP keys, use provided scopes or default for key type
-      scopes = validatedData.scopes || DEFAULT_API_KEY_SCOPES[validatedData.key_type]
+      scopes = validatedData.scopes || [...DEFAULT_API_KEY_SCOPES[validatedData.key_type]]
     }
 
     // US-010: Generate key prefix based on type and PROJECT environment

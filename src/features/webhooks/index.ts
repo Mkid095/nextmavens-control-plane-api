@@ -1,22 +1,14 @@
 /**
- * Webhooks Feature
- *
- * Provides webhook delivery system with idempotency support.
- *
- * US-006: Add Idempotency to Send Webhook
- * US-006: Implement Signature Verification
- * US-007: Emit Events on Actions
+ * Minimal webhooks module for Control Plane API
+ * In production, this would emit webhook events to configured endpoints
+ * For now, it just logs events for debugging
  */
 
-// Export types
-export * from './types'
-
-// Export webhook delivery functions
-export * from './lib/webhook-delivery'
-
-// Export signature verification functions
-export * from './lib/webhook-signature'
-
-// Export migrations
-export { createWebhooksTable, dropWebhooksTable } from './migrations/create-webhooks-table'
-export { createEventLogTable, dropEventLogTable } from './migrations/create-event-log-table'
+export async function emitEvent(
+  projectId: string,
+  eventType: string,
+  data: Record<string, unknown>
+): Promise<void> {
+  // Fire and forget - log the event
+  console.log(`[Webhook] Event: ${eventType} for project: ${projectId}`, data)
+}

@@ -102,7 +102,7 @@ export async function PUT(
     } catch (error) {
       if (error instanceof ZodError) {
         return toErrorNextResponse(
-          { code: ErrorCode.VALIDATION_ERROR, message: error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ') }
+          { code: ErrorCode.VALIDATION_ERROR, message: error.issues.map(e => `${e.path.join('.')}: ${e.message}`).join(', ') }
         )
       }
       throw error
