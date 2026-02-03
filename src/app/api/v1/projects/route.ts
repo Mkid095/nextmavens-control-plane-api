@@ -46,7 +46,7 @@ async function validateProjectOwnership(
 
   // Personal project: check if user is the owner
   if (!project.organization_id) {
-    if (project.developer_id !== developer.id) {
+    if (String(project.developer_id) !== String(developer.id)) {
       return { valid: false, project }
     }
     return { valid: true, project }
