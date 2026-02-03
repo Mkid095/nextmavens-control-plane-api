@@ -76,5 +76,3 @@ export async function GET(req: NextRequest, context: RouteContext) {
   }
 }
 
-// Force dynamic rendering for API routes
-export const dynamic = 'force-dynamic'

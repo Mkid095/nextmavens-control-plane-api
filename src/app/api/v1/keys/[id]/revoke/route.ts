@@ -99,5 +99,3 @@ export async function DELETE(req: NextRequest, context: RouteContext) {
   }
 }
 
-// Force dynamic rendering for API routes
-export const dynamic = 'force-dynamic'
