@@ -222,7 +222,7 @@ export async function POST(req: NextRequest) {
 
         // Check if project with same name already exists for this developer
         const existingProject = await pool.query(
-          'SELECT id FROM projects p JOIN tenants t ON p.tenant_id = t.id WHERE p.developer_id = $1 AND t.name = $2',
+          'SELECT p.id FROM projects p JOIN tenants t ON p.tenant_id = t.id WHERE p.developer_id = $1 AND t.name = $2',
           [developer.id, validatedData.project_name]
         )
 
