@@ -117,7 +117,7 @@ export type MemberStatus = z.infer<typeof memberStatusEnum>
 // Create API key schema
 export const createApiKeySchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(255, 'Name must be at most 255 characters'),
-  project_id: z.string().uuid('Invalid project ID format').optional(),
+  project_id: z.union([z.string().regex(/^\d+$/, 'Invalid project ID format'), z.number().int().positive()]).optional(),
   key_type: apiKeyTypeEnum.default('public'),
   environment: apiKeyEnvironmentEnum.default('live'),
   scopes: z.array(apiKeyScopeEnum).optional(),
@@ -127,7 +127,7 @@ export const createApiKeySchema = z.object({
 
 // Query parameters for listing API keys
 export const listApiKeysQuerySchema = z.object({
-  project_id: z.string().uuid('Invalid project ID format').optional(),
+  project_id: z.union([z.string().regex(/^\d+$/, 'Invalid project ID format'), z.number().int().positive()]).optional(),
   key_type: apiKeyTypeEnum.optional(),
   environment: apiKeyEnvironmentEnum.optional(),
   limit: z.string().transform(Number).refine(n => n > 0 && n <= 100, 'Limit must be between 1 and 100').optional(),
