@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { authenticateRequest, type JwtPayload } from '@/lib/auth'
 import { getPool } from '@/lib/db'
 
+export const dynamic = 'force-dynamic'
+
 // Helper function for standard error responses
 function errorResponse(code: string, message: string, status: number) {
   return NextResponse.json(
