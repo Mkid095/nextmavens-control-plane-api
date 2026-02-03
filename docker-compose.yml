@@ -3,6 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - DATABASE_URL=${DATABASE_URL}
+        - JWT_SECRET=${JWT_SECRET}
+        - REFRESH_SECRET=${REFRESH_SECRET}
+        - NODE_ENV=${NODE_ENV:-production}
     container_name: nextmavens-control-plane-api
     env_file:
       - .env
