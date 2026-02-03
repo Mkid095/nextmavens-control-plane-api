@@ -98,3 +98,6 @@ export async function DELETE(req: NextRequest, context: RouteContext) {
     return errorResponse('INTERNAL_ERROR', 'Failed to revoke API key', 500)
   }
 }
+
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic'

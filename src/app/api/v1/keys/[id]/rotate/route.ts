@@ -137,3 +137,6 @@ export async function POST(req: NextRequest, context: RouteContext) {
     return errorResponse('INTERNAL_ERROR', 'Failed to rotate API key', 500)
   }
 }
+
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic'

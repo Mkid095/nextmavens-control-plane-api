@@ -268,3 +268,6 @@ export async function GET(req: NextRequest) {
     return errorResponse('INTERNAL_ERROR', 'Failed to fetch MCP analytics', 500)
   }
 }
+
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic'

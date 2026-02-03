@@ -187,3 +187,6 @@ function determineOverallStatus(
   // Otherwise unknown
   return 'unknown'
 }
+
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic'

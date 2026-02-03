@@ -75,3 +75,6 @@ export async function GET(req: NextRequest, context: RouteContext) {
     return errorResponse('INTERNAL_ERROR', 'Failed to get API key', 500)
   }
 }
+
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic'

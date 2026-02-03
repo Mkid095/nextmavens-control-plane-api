@@ -329,3 +329,6 @@ export async function POST(req: NextRequest) {
     return errorResponse('INTERNAL_ERROR', 'Failed to create project', 500)
   }
 }
+
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic'

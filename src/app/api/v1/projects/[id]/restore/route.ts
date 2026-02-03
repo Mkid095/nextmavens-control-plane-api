@@ -98,3 +98,6 @@ export async function POST(
     return toErrorNextResponse(error, params.id)
   }
 }
+
+// Force dynamic rendering for API routes
+export const dynamic = 'force-dynamic'
