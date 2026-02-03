@@ -18,7 +18,17 @@ COPY --from=deps /app/node_modules ./node_modules
 
 # Force cache invalidation - change this value to force rebuild
 ARG CACHEBUST=1
+ARG DATABASE_URL
+ARG JWT_SECRET
+ARG REFRESH_SECRET
+ARG NODE_ENV
 COPY . .
+
+# Set environment variables for build
+ENV DATABASE_URL=${DATABASE_URL}
+ENV JWT_SECRET=${JWT_SECRET}
+ENV REFRESH_SECRET=${REFRESH_SECRET}
+ENV NODE_ENV=${NODE_ENV:-production}
 
 # Build Next.js
 RUN npm run build
