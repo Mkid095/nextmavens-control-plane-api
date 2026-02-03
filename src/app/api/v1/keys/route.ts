@@ -237,7 +237,7 @@ export async function POST(req: NextRequest) {
       `INSERT INTO api_keys (project_id, key_type, key_prefix, key_hash, name, scopes, environment)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING id, key_type, key_prefix, scopes, environment, name, created_at`,
-      [projectId, validatedData.key_type, keyPrefix, hashedSecretKey, validatedData.name, JSON.stringify(scopes), keyEnvironment]
+      [projectId, validatedData.key_type, keyPrefix, hashedSecretKey, validatedData.name, scopes, keyEnvironment]
     )
 
     const apiKey = dbResult.rows[0]
