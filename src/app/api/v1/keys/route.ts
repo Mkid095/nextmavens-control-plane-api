@@ -165,7 +165,7 @@ export async function POST(req: NextRequest) {
     const pool = getPool()
 
     // Determine project ID
-    let projectId = validatedData.project_id
+    let projectId = validatedData.project_id ? String(validatedData.project_id) : undefined
     if (!projectId) {
       // Get or create a default project for the developer
       const projectResult = await pool.query(
@@ -180,7 +180,7 @@ export async function POST(req: NextRequest) {
           400
         )
       }
-      projectId = projectResult.rows[0].id
+      projectId = String(projectResult.rows[0].id)
     }
 
     // Validate project ownership and get project details
